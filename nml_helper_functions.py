@@ -10,18 +10,27 @@ def test_data(test_data_name, lablel_mode):
   return test_data_loaders
 
 
-def data_augmentation_creater(rflip, rrot, rzoom, rheight, rwidth, rsale, data_aug_name, input, model_type="EfficientNet"):
-  if model_type == "EfficientNet":
-    # EfficientNet already inclues rescaling
-    data_augmentation = tf.keras.Sequential([
-        tf.keras.layers.RandomFlip(rflip),
-        tf.keras.layers.RandomRotation(rrot),
-        tf.keras.layers.RandomZoom(rzoom),
-        tf.keras.layers.RandomHeight(rheight),
-        tf.keras.layers.RandomWidth(rwidth)],
-        name=data_aug_name)
-    augmented_tensor = data_augmentation(input)
+def data_augmentation_creater_efficient_net(rflip, rrot, rzoom, rheight, rwidth, data_aug_name, input):
+  
+  '''
+  Only for EfficientNet
+  '''
+  data_augmentation = tf.keras.Sequential([
+      tf.keras.layers.RandomFlip(rflip),
+      tf.keras.layers.RandomRotation(rrot),
+      tf.keras.layers.RandomZoom(rzoom),
+      tf.keras.layers.RandomHeight(rheight),
+      tf.keras.layers.RandomWidth(rwidth)],
+      name=data_aug_name)
+  augmented_tensor = data_augmentation(input)
   return augmented_tensor
+
+
+def data_augmentation_creater(rflip, rrot, rzoom, rheight, rwidth, rsale, data_aug_name, input):
+
+  '''
+  Not for EfficientNet
+  '''
   data_augmentation = tf.keras.Sequential([
       tf.keras.layers.RandomFlip(rflip),
       tf.keras.layers.RandomRotation(rrot),
@@ -31,5 +40,4 @@ def data_augmentation_creater(rflip, rrot, rzoom, rheight, rwidth, rsale, data_a
       tf.keras.layers.Rescaling(rsale)],
       name=data_aug_name)
   augmented_tensor = data_augmentation(input)
-
   return augmented_tensor
