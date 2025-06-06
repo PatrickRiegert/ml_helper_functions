@@ -1,8 +1,5 @@
 import tensorflow as tf
 
-# Define IMG_SIZE and BATCH_SIZE
-IMG_SIZE = (256, 256)  # Example size, adjust as needed
-BATCH_SIZE = 32  # Example batch size, adjust as needed
 
 def train_data(train_data_name, label_mode):
     train_data_loaders = tf.keras.preprocessing.image_dataset_from_directory(
