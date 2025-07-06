@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-def train_data(train_data_name, label_mode):
+def train_data(train_data_name, label_mode, IMG_SIZE, BATCH_SIZE):
     train_data_loaders = tf.keras.preprocessing.image_dataset_from_directory(
         directory=train_data_name,
         image_size=IMG_SIZE,
@@ -9,13 +9,14 @@ def train_data(train_data_name, label_mode):
         batch_size=BATCH_SIZE)
     return train_data_loaders
 
-def test_data(test_data_name, label_mode):
+def test_data(test_data_name, label_mode, IMG_SIZE, BATCH_SIZE):
     test_data_loaders = tf.keras.preprocessing.image_dataset_from_directory(
         directory=test_data_name,
         image_size=IMG_SIZE,
         label_mode=label_mode,
         batch_size=BATCH_SIZE)
     return test_data_loaders
+
 
 def data_augmentation_creator_efficient_net(rflip, rrot, rzoom, rheight, rwidth, data_aug_name, input):
     '''
@@ -30,6 +31,7 @@ def data_augmentation_creator_efficient_net(rflip, rrot, rzoom, rheight, rwidth,
         name=data_aug_name)
     augmented_tensor = data_augmentation(input)
     return augmented_tensor
+
 
 def data_augmentation_creator(rflip, rrot, rzoom, rheight, rwidth, rsale, data_aug_name, input):
     '''
