@@ -9,12 +9,13 @@ def train_data(train_data_name, label_mode, IMG_SIZE, BATCH_SIZE):
         batch_size=BATCH_SIZE)
     return train_data_loaders
 
-def test_data(test_data_name, label_mode, IMG_SIZE, BATCH_SIZE):
+def test_data(test_data_name, label_mode, IMG_SIZE, BATCH_SIZE, TSHUFFLE_MODE = True):
     test_data_loaders = tf.keras.preprocessing.image_dataset_from_directory(
         directory=test_data_name,
         image_size=IMG_SIZE,
         label_mode=label_mode,
-        batch_size=BATCH_SIZE)
+        batch_size=BATCH_SIZE,
+        shuffle=TSHUFFLE_MODE)
     return test_data_loaders
 
 
